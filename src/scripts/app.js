@@ -79,6 +79,11 @@ async function PopulateData() {
             allEvoPaths.push(evoArray);
         }
     }
+    for (let i = 0; i < allEvoPaths.length; i++) {
+        let pEvo = document.createElement('p');
+        pEvo.textContent = allEvoPaths[i].map(data => data.name).join(' --> ');
+        infoCont.append(pEvo);
+    }
     console.log(allEvoPaths);
 
 
