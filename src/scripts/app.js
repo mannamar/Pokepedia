@@ -4,8 +4,9 @@ let searchBar = document.getElementById('searchBar');
 let searchBtn = document.getElementById('searchBtn');
 
 async function GetPokemonData() {
-    infoCont.innerHTML = '';
     let searchTerm = searchBar.value.toLowerCase();
+    searchBar.value = '';
+    infoCont.innerHTML = '';
 
     let pokResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`);
     pokData = await pokResp.json();
@@ -52,14 +53,23 @@ async function PopulateData() {
     let pMov = document.createElement('p');
     pMov.textContent = 'Moves: ' + moves.join(', ');
 
+    infoCont.append(pName, img1, img2, pLoc, pTypes, pAbil, pMov);
+
+    // Figure out evo paths
     let allEvoPaths = [];
-    let evoBase = evoData.chain.species.name;
+    let evoBase = {};
+    evoBase.name = evoData.chain.species.name;
+    evoBase.id = evoData.chain.species.url.split('/').slice(-2)[0];
     let evoTo = evoData.chain.evolves_to;
     for (let i = 0; i < evoTo.length; i++) {
-        let evoMid = evoTo[i].species.name;
+        let evoMid = {};
+        evoMid.name = evoTo[i].species.name;
+        evoMid.id = evoTo[i].species.url.split('/').slice(-2)[0];
         let evoArray = [evoBase, evoMid];
         if (evoTo[i].evolves_to.length >= 1) {
-            let evoMax = evoTo[i].evolves_to[0].species.name;
+            let evoMax = {};
+            evoMax.name = evoTo[i].evolves_to[0].species.name;
+            evoMax.id = evoTo[i].evolves_to[0].species.url.split('/').slice(-2)[0];
             evoArray.push(evoMax);
         }
         allEvoPaths.push(evoArray);
@@ -68,13 +78,19 @@ async function PopulateData() {
 
 
 
-    infoCont.append(pName, img1, img2, pLoc, pTypes, pAbil, pMov);
 }
 
 searchBtn.addEventListener('click', async function() {
     await GetPokemonData();
     await PopulateData();
 });
+
+searchBar.addEventListener('keypress', async function(key) {
+    if (key.key === 'Enter') {
+        await GetPokemonData();
+        await PopulateData();
+    }
+})
 
 function CapCase(word, splitOn = '-', joinWith = ' ') {
     return word.split(splitOn)
