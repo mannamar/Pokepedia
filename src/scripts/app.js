@@ -27,7 +27,7 @@ async function GetPokemonData() {
 
 async function PopulateData() {
     let pName = document.createElement('p');
-    pName.textContent = pokData.name[0].toUpperCase() + pokData.name.slice(1);
+    pName.textContent = CapCase(pokData.name);
 
     let img1 = document.createElement('img');
     img1.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokData.id}.png`
@@ -58,24 +58,28 @@ async function PopulateData() {
     // Figure out evo paths
     let allEvoPaths = [];
     let evoBase = {};
-    evoBase.name = evoData.chain.species.name;
+    evoBase.name = CapCase(evoData.chain.species.name);
     evoBase.id = evoData.chain.species.url.split('/').slice(-2)[0];
     let evoTo = evoData.chain.evolves_to;
     for (let i = 0; i < evoTo.length; i++) {
         let evoMid = {};
-        evoMid.name = evoTo[i].species.name;
+        evoMid.name = CapCase(evoTo[i].species.name);
         evoMid.id = evoTo[i].species.url.split('/').slice(-2)[0];
         let evoArray = [evoBase, evoMid];
-        if (evoTo[i].evolves_to.length >= 1) {
-            let evoMax = {};
-            evoMax.name = evoTo[i].evolves_to[0].species.name;
-            evoMax.id = evoTo[i].evolves_to[0].species.url.split('/').slice(-2)[0];
-            evoArray.push(evoMax);
+        let innerEvoTo = evoTo[i].evolves_to;
+        if (innerEvoTo.length >= 1) {
+            for (let j = 0; j < innerEvoTo.length; j++) {
+                let evoMax = {};
+                evoMax.name = CapCase(innerEvoTo[j].species.name);
+                evoMax.id = innerEvoTo[j].species.url.split('/').slice(-2)[0];
+                evoArray = [evoBase, evoMid, evoMax];
+                allEvoPaths.push(evoArray);
+            }
+        } else {
+            allEvoPaths.push(evoArray);
         }
-        allEvoPaths.push(evoArray);
     }
     console.log(allEvoPaths);
-
 
 
 }
