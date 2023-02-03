@@ -13,10 +13,17 @@ async function GetPokemonData() {
     let specResp = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${searchTerm}`);
     specData = await specResp.json();
     pokId = await pokData.id;
-    let evoUrl = specData.evolution_chain.url;
-    let evoResp = await fetch(evoUrl);
-    evoData = await evoResp.json();
-    console.log(evoUrl);
+    if (specData.evolution_chain !== null) {
+        console.warn('Going in)');
+        let evoUrl = specData.evolution_chain.url;
+        console.log(specData.evolution_chain);
+        console.log(evoUrl);
+        let evoResp = await fetch(evoUrl);
+        evoData = await evoResp.json();
+        console.log(evoUrl);
+    } else {
+        evoData = null;
+    }
     let id = pokData.id;
     let encResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`);
     encData = await encResp.json();
@@ -56,6 +63,9 @@ async function PopulateData() {
     infoCont.append(pName, img1, img2, pLoc, pTypes, pAbil, pMov);
 
     // Figure out evo paths
+    if (evoData === null) {
+        return; // Exit if no evo data
+    }
     let allEvoPaths = [];
     let evoBase = {};
     evoBase.name = CapCase(evoData.chain.species.name);
