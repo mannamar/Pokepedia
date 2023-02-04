@@ -4,26 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://unpkg.com/phosphor-icons"></script>
 </head>
 
 <body>
-    <div>
-        <input type="text">
+
+    
+    <div id="bigCont" class="container mx-auto">
+        <img src="./assets/logo.png" alt="" class="w-96 mx-auto">
+
+        
+        <div class="grid grid-cols-5 gap-x-16 content-center">
+            
+            <div id="topCont" class="container col-span-5">
+
+                <div class="flex">
+                    <input id="searchBar" type="text" placeholder="Pokemon name/number" class="border-2 border-black px-3 py-1">
+                    <button id="searchBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-5">Search</button>
+                    <button id="randBtn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Random</button>
+                    <button id="favBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-5">Favorites</button>
+                </div>
+            </div>
+
+            <div id="leftCont" class="container col-span-3">
+
+
+                <div class="flex items-baseline py-10">
+                    <p id="pokNumTxt" class="text-2xl">#001</p>
+                    <p id="pokNameTxt" class="text-5xl px-5">Bulbasaur</p>
+                    <i id="heartImg" class="ph-heart text-4xl text-white"></i>
+                </div>
+
+                <img id="pokImg" src="./assets/1.png" alt="Bulbasaur" class="mx-auto" data-adaptive-background="1">
+
+                <p id="flavTxt" class="text-3xl py-9">A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.</p>
+            </div>
+
+            <div id="rightCont" class="container col-span-2">
+                <p class="text-3xl mt-12">Info</p>
+                <div class="flex w-full mt-5">
+                    <p class="shortCol text-2xl">Type:</p>
+                    <p id="typeTxt" class="text-2xl">Grass, Poison</p>
+                </div>
+
+                <div class="flex w-full">
+                    <p class="shortCol text-2xl">Found In:</p>
+                    <p id="locTxt" class="text-2xl">Cerulean City</p>
+                </div>
+        
+                <div class="flex w-full">
+                    <p class="shortCol text-2xl">Abilities:</p>
+                    <p id="abilTxt" class="text-2xl longCol">Overgrow, Chlorophyll</p>
+                </div>
+
+                <div class="flex w-full">
+                    <p class="shortCol text-2xl">Moves:</p>
+                    <div class="longCol max-h-24 overflow-y-scroll">
+                        <p id="movTxt" class="text-2xl">Razor Wind, Swords Dance, Cut, Bind, Vine Whip, Headbutt, Tackle, Body Slam, Take Down, Double Edge, Growl, Strength, Mega Drain, Leech Seed, Growth, Razor Leaf, Solar Beam, Poison Powder, Sleep Powder, Petal Dance, String Shot, Toxic, Rage, Mimic, Double Team, Defense Curl, Light Screen, Reflect, Bide, Sludge, Skull Bash, Amnesia, Flash, Rest, Substitute, Snore, Curse, Protect, Sludge Bomb, Mud Slap, Outrage, Giga Drain, Endure, Charm, False Swipe, Swagger, Fury Cutter, Attract, Sleep Talk, Return, Frustration, Safeguard, Sweet Scent, Synthesis, Hidden Power, Sunny Day, Rock Smash, Facade, Nature Power, Helping Hand, Ingrain, Knock Off, Secret Power, Weather Ball, Grass Whistle, Bullet Seed, Magical Leaf, Natural Gift, Worry Seed, Seed Bomb, Energy Ball, Leaf Storm, Power Whip, Captivate, Grass Knot, Venoshock, Round, Echoed Voice, Grass Pledge, Work Up, Grassy Terrain, Confide, Grassy Glide</p>
+                    </div>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="longCol max-h-28 overflow-y-scroll">
+                    </div>
+                </div>
+                
+                <p class="text-3xl mt-10">Evolutions</p>
+                <div id="evoCont">
+                    <p id="evoTxt" class="text-2xl mt-2">Bulbasaur --> Ivysaur --> Venusaur</p>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-    <div class="container mx-auto flex justify-center">
-        <img src="./assets/logo.png" alt="" class="w-96">
-    </div>
+
 
     <div id="mainCont" class="container mx-auto flex flex-col content-center">
 
-        <input id="searchBar" type="text" placeholder="Pokemon name/number" class="border-2 border-black px-3 py-1">
-        <button id="searchBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Button
-        </button>
 
+
+        <br><br><br><br><br>
         <div id="infoCont">
-
         </div>
           
 
@@ -31,7 +97,8 @@
 
 
 
-    <script src="./scripts/app.js"></script>
+    <script type="module" src="./scripts/app.js"></script>
+    <!-- <script type="text/javascript" src="./scripts/adaptive-backgrounds.js"></script> -->
 </body>
 
 </html>
