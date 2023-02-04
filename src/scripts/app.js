@@ -1,5 +1,7 @@
 import { AdaptiveBackgrounds } from './adaptive-backgrounds.js'
 
+import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage } from "./localstorage.js";
+
 let pokData, specData, pokId, encData, evoData, allEvoPaths;
 let isShiny = false;
 
@@ -28,6 +30,19 @@ async function GetPokemonData(pokemon = searchBar.value.toLowerCase()) {
     encData = await encResp.json();
     if (encData.length === 0) {
         encData = [{location_area: {name: 'Unkown'}}];
+    }
+}
+
+function setFavIcon() {
+    let favorites = getLocalStorage();
+    if (favorites.includes(pokId)) {
+        heartImg.classList.add('ph-heart-fill');
+        heartImg.classList.add('text-red-600');
+        heartImg.classList.remove('ph-heart');
+    } else {
+        heartImg.classList.remove('ph-heart-fill');
+        heartImg.classList.remove('text-red-600');
+        heartImg.classList.add('ph-heart');
     }
 }
 
@@ -67,6 +82,7 @@ async function PopulateData() {
     let moves = pokData.moves.map( data => CapCase(data.move.name));
     movTxt.textContent = moves.join(', ');
 
+    setFavIcon();
     ParseEvoData();
     PopulateEvoData();
 
@@ -153,10 +169,50 @@ pokImg.addEventListener('click', function() {
 });
 
 heartImg.addEventListener('click', function() {
+    let favorites = getLocalStorage();
+    console.log(pokId);
+    if (favorites.includes(pokId)) {
+        removeFromLocalStorage(pokId);
+    } else {
+        saveToLocalStorageByName(pokId);
+    }
     heartImg.classList.toggle('ph-heart-fill');
     heartImg.classList.toggle('ph-heart');
     heartImg.classList.toggle('text-red-600');
 })
+
+favBtn.addEventListener('click', function() {
+    CreateElements();
+});
+
+function CreateElements() {
+    favBox.innerHTML = '';
+    let favorites = getLocalStorage();
+    
+    favorites.map(pokNum => {
+        let img = document.createElement('img');
+        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokNum}.png`;
+        img.type = 'button';
+        img.setAttribute('data-drawer-hide', 'favDrawer');
+
+        // let deleteBtn = document.createElement('button');
+        // deleteBtn.className = 'btn btn-danger';
+        // deleteBtn.textContent = 'Delete';
+        // deleteBtn.type = 'button';
+        // deleteBtn.addEventListener('click', function() {
+        //     removeFromLocalStorage(person);
+        // });
+        img.addEventListener('click', async function() {
+            await GetPokemonData(pokNum);
+            await PopulateData();
+            AdaptiveBackgrounds();
+        });
+
+        favBox.appendChild(img);
+        // favDrawer.appendChild(deleteBtn);
+    })
+
+}
 
 function CapCase(word, splitOn = '-', joinWith = ' ') {
     return word.split(splitOn)
@@ -164,8 +220,17 @@ function CapCase(word, splitOn = '-', joinWith = ' ') {
                 .join(joinWith);
 }
 
-GetPokemonData(1);
+async function PageLoad() {
+    await GetPokemonData(1);
+    setFavIcon();
+    AdaptiveBackgrounds();
+}
 
-// stunfisk don't be evolving
+PageLoad();
 
-AdaptiveBackgrounds();
+// Check these edge case
+    // Stunfisk don't be evolving
+    // Eevee going ham
+    // MewTwo no evo
+    // Gholdengo no evo data
+    // Cosmog two paths

@@ -27,6 +27,14 @@ p {
     /* padding-bottom: 5rem; */
 }
 
+#pokImg {
+    transition: transform .1s;
+}
+
+#pokImg:hover {
+    transform: scale(1.05);
+}
+
 @media (max-width: 1024px) {
     #evoCont {
         padding-bottom: 5rem;
