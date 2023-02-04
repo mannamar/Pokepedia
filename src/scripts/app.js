@@ -10,7 +10,6 @@ let evoCont = document.getElementById('evoCont');
 
 async function GetPokemonData(pokemon = searchBar.value.toLowerCase()) {
     searchBar.value = '';
-    infoCont.innerHTML = '';
 
     let pokResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
     pokData = await pokResp.json();
@@ -121,7 +120,7 @@ function PopulateEvoData() {
         pEvo.classList.add('text-2xl', 'mt-2');
         evoCont.append(pEvo);
     }
-    console.log(allEvoPaths);
+    // console.log(allEvoPaths);
 }
 
 searchBtn.addEventListener('click', async function() {

@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokepedia</title>
+    <link rel="icon" type="image/x-icon" href="./assets/pokeball.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,12 +23,12 @@
         <div class="grid grid-cols-5 gap-x-16 content-center">
             
             <div id="topCont" class="container col-span-5">
-                <p class="text-8xl mt-16">Pokepedia</p>
-                <div class="flex mt-5">
-                    <input id="searchBar" type="text" placeholder="Pokemon name/number" class="border-2 border-black px-3 py-1">
-                    <button id="searchBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-5">Search</button>
-                    <button id="randBtn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Random</button>
-                    <button id="favBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-5">Favorites</button>
+                <p id="titleTxt" class="text-8xl mt-16">Pokepedia</p>
+                <div id="btnCont" class="flex flex-wrap mt-5">
+                    <input id="searchBar" type="text" placeholder="Pokemon name/number" class="px-3 py-1">
+                    <button id="searchBtn" class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-5">Search</button>
+                    <button id="randBtn" class="btn bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Random</button>
+                    <button id="favBtn" class="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-5">Favorites</button>
                 </div>
             </div>
 
@@ -45,7 +47,7 @@
             </div>
 
             <div id="rightCont" class="container col-span-5 lg:col-span-2">
-                <p class="text-3xl mt-12">Info</p>
+                <p id="infoTitle" class="text-3xl mt-14">Info</p>
                 <div class="flex w-full mt-5">
                     <p class="shortCol text-2xl">Type:</p>
                     <p id="typeTxt" class="text-2xl">Grass, Poison</p>
@@ -82,20 +84,6 @@
 
 
     </div>
-
-
-    <div id="mainCont" class="container mx-auto flex flex-col content-center">
-
-
-
-        <br><br><br><br><br>
-        <div id="infoCont">
-        </div>
-          
-
-    </div>
-
-
 
     <script type="module" src="./scripts/app.js"></script>
     <!-- <script type="text/javascript" src="./scripts/adaptive-backgrounds.js"></script> -->
