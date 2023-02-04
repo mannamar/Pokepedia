@@ -67,77 +67,9 @@ async function PopulateData() {
 
     let moves = pokData.moves.map( data => CapCase(data.move.name));
     movTxt.textContent = moves.join(', ');
-    
-    
-    
-    
-    let img1 = document.createElement('img');
-    img1.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokData.id}.png`;
-    img1.width = 300;
-    
-
-    let img2 = document.createElement('img');
-    img2.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokData.id}.png`
-    img2.width = 300;
-
-    let pLoc = document.createElement('p');
-    pLoc.textContent = 'Location: ' + CapCase(location);
-
-    let pTypes = document.createElement('p');
-    pTypes.textContent = 'Type: ' + types.join(', ');
-
-    let pAbil = document.createElement('p');
-    pAbil.textContent = 'Abilities: ' + abilities.join(', ');
-
-    let pMov = document.createElement('p');
-    pMov.textContent = 'Moves: ' + moves.join(', ');
-
-    infoCont.append(pName, img1, img2, pLoc, pTypes, pAbil, pMov);
 
     ParseEvoData();
-
-    // Figure out evo paths
-    // if (evoData === null) {
-    //     let evoBase = {};
-    //     evoBase.name = pokData.name;
-    //     evoBase.id = pokData.name;
-    //     let allEvoPaths = [evoBase];
-    //     return; // Exit if no evo data
-    // }
-    // let allEvoPaths = [];
-    // let evoBase = {};
-    // evoBase.name = CapCase(evoData.chain.species.name);
-    // evoBase.id = evoData.chain.species.url.split('/').slice(-2)[0];
-    // let evoTo = evoData.chain.evolves_to;
-    // for (let i = 0; i < evoTo.length; i++) {
-    //     let evoMid = {};
-    //     evoMid.name = CapCase(evoTo[i].species.name);
-    //     evoMid.id = evoTo[i].species.url.split('/').slice(-2)[0];
-    //     let evoArray = [evoBase, evoMid];
-    //     let innerEvoTo = evoTo[i].evolves_to;
-    //     if (innerEvoTo.length >= 1) {
-    //         for (let j = 0; j < innerEvoTo.length; j++) {
-    //             let evoMax = {};
-    //             evoMax.name = CapCase(innerEvoTo[j].species.name);
-    //             evoMax.id = innerEvoTo[j].species.url.split('/').slice(-2)[0];
-    //             evoArray = [evoBase, evoMid, evoMax];
-    //             allEvoPaths.push(evoArray);
-    //         }
-    //     } else {
-    //         allEvoPaths.push(evoArray);
-    //     }
-    // }
-
-    evoCont.innerHTML = '';
-    for (let i = 0; i < allEvoPaths.length; i++) {
-        let pEvo = document.createElement('p');
-        pEvo.textContent = allEvoPaths[i].map(data => data.name).join(' --> ');
-        pEvo.classList.add('text-2xl', 'mt-2');
-        evoCont.append(pEvo);
-        // infoCont.append(pEvo);
-    }
-    console.log(allEvoPaths);
-
+    PopulateEvoData();
 
 }
 
@@ -182,7 +114,14 @@ function ParseEvoData() {
 }
 
 function PopulateEvoData() {
-
+    evoCont.innerHTML = '';
+    for (let i = 0; i < allEvoPaths.length; i++) {
+        let pEvo = document.createElement('p');
+        pEvo.textContent = allEvoPaths[i].map(data => data.name).join(' --> ');
+        pEvo.classList.add('text-2xl', 'mt-2');
+        evoCont.append(pEvo);
+    }
+    console.log(allEvoPaths);
 }
 
 searchBtn.addEventListener('click', async function() {
