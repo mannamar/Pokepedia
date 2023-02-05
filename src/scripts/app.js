@@ -2,6 +2,8 @@ import { AdaptiveBackgrounds } from './adaptive-backgrounds.js'
 
 import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage } from "./localstorage.js";
 
+import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
+
 const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
 const drawer = new Drawer(favDrawer);
@@ -52,15 +54,12 @@ function setFavIcon() {
 
 function GetEnglishFlavText() {
     let flavArray = specData.flavor_text_entries;
-    let flav;
+    let flav = 'Not much is known about this mysterious Pokemon. Play the latest game to find out more!';
     for (let i = 0; i < flavArray.length; i++) {
         if (flavArray[i].language.name == 'en') {
-            flav = flavArray[i].flavor_text;
+            flav = flavArray[i].flavor_text.replaceAll('', ' ');
             break;
         }
-    }
-    if (flav === undefined) {
-        flav = 'Not much is known about this mysterious Pokemon. Play the latest game to find out more!';
     }
     return flav;
 }
@@ -182,7 +181,7 @@ pokImg.addEventListener('click', function() {
 
 heartImg.addEventListener('click', function() {
     let favorites = getLocalStorage();
-    console.log(pokId);
+    // console.log(pokId);
     if (favorites.includes(pokId)) {
         removeFromLocalStorage(pokId);
     } else {
@@ -245,6 +244,12 @@ async function PageLoad() {
 }
 
 PageLoad();
+
+// No Auto-complete for now
+// new Awesomplete(searchBar, {
+// 	list: pokemonNames
+// });
+
 
 // Check these edge case
     // Stunfisk don't be evolving
