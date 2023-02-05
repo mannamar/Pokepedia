@@ -6,6 +6,9 @@ function saveToLocalStorageByName(name) {
     // Add new name to our favorites array
     favorites.push(name);
 
+    // Sort favorites array
+    favorites.sort((a, b) => a - b);
+
     // Save updated array to local storage
     localStorage.setItem('Favorites', JSON.stringify(favorites));
 }

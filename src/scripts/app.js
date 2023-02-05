@@ -2,6 +2,10 @@ import { AdaptiveBackgrounds } from './adaptive-backgrounds.js'
 
 import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage } from "./localstorage.js";
 
+const favDrawer = document.getElementById('favDrawer');
+const drawerXBtn = document.getElementById('drawerXBtn');
+const drawer = new Drawer(favDrawer);
+
 let pokData, specData, pokId, encData, evoData, allEvoPaths;
 let isShiny = false;
 
@@ -191,7 +195,12 @@ heartImg.addEventListener('click', function() {
 
 favBtn.addEventListener('click', function() {
     CreateElements();
+    drawer.show();
 });
+
+drawerXBtn.addEventListener('click', function() {
+    drawer.hide();
+})
 
 function CreateElements() {
     favBox.innerHTML = '';
@@ -214,6 +223,7 @@ function CreateElements() {
             await GetPokemonData(pokNum);
             await PopulateData();
             AdaptiveBackgrounds();
+            drawer.hide();
         });
 
         favBox.appendChild(img);
