@@ -140,6 +140,10 @@ function PopulateEvoData() {
 }
 
 searchBtn.addEventListener('click', async function() {
+    if (searchBar.value === '') {
+        console.warn('Empty search')
+        return;
+    };
     await GetPokemonData();
     await PopulateData();
     AdaptiveBackgrounds();
@@ -147,6 +151,10 @@ searchBtn.addEventListener('click', async function() {
 
 searchBar.addEventListener('keypress', async function(key) {
     if (key.key === 'Enter') {
+        if (searchBar.value === '') {
+            console.warn('Empty search')
+            return;
+        };
         await GetPokemonData();
         await PopulateData();
         AdaptiveBackgrounds();

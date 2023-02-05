@@ -114,3 +114,24 @@ p {
         font-size: 12px;
     }
 }
+
+@media (hover: none) {
+    #pokImg:hover {
+        transform: none;
+    }
+
+    #searchBtn:hover {
+        --tw-bg-opacity: 1;
+        background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+    }
+
+    #randBtn:hover {
+        --tw-bg-opacity: 1;
+        background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+    }
+
+    #favBtn:hover {
+        --tw-bg-opacity: 1;
+        background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+    }
+}
