@@ -55,7 +55,7 @@
             }
             // Calculate brightness value (based on HSL)
             var brightness = 0.2126 * f[0] + 0.7152 * f[1] + 0.0722 * f[2];
-            if(m !== "0,0,0" && brightness < 200 && brightness > 50){  // Only count the color if it's not black (0,0,0) and its brightness is below 190
+            if(m !== "0,0,0" && brightness < 210 && brightness > 50){  // Only count the color if it's not black (0,0,0) and its brightness is below 190
                 var d=c[m];
                 if(d>l.dominant.count){
                 l.dominant.name=m;
