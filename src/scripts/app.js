@@ -140,7 +140,6 @@ function PopulateEvoData() {
         // pEvo.classList.add('text-2xl', 'mt-2');
         // evoCont.append(pEvo);
         let thisPath = allEvoPaths[i];
-        console.log(thisPath);
         let outterDiv = document.createElement('div');
         outterDiv.classList.add('flex', 'items-center', 'justify-center');
         for (let j = 0; j < thisPath.length; j++) {

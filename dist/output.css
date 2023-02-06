@@ -901,6 +901,11 @@ video {
   transition-duration: 150ms;
 }
 
+body {
+  background-color: rgb(140, 199, 172);
+  transition: background-color 1s ease;
+}
+
 p {
   font-family: 'Nunito', sans-serif;
   /* font-size: 30px; */
