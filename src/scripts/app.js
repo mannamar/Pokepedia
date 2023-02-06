@@ -2,7 +2,7 @@ import { AdaptiveBackgrounds } from './adaptive-backgrounds.js'
 
 import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage } from "./localstorage.js";
 
-import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
+// import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
 
 const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
@@ -274,6 +274,8 @@ function CapCase(word, splitOn = '-', joinWith = ' ') {
 async function PageLoad() {
     await GetPokemonData(1);
     setFavIcon();
+    ParseEvoData();
+    PopulateEvoData();
     AdaptiveBackgrounds();
 }
 

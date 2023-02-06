@@ -25,6 +25,8 @@ p {
 #evoCont {
     margin-top: 1.25rem;
     /* padding-bottom: 5rem; */
+    max-height: 290px;
+    overflow-y: scroll;
 }
 
 #pokImg,
@@ -38,7 +40,7 @@ p {
 }
 
 .evoCol {
-    width: 25%;
+    width: 28%;
 }
 
 .evoImg {
@@ -53,7 +55,8 @@ p {
 
 @media (max-width: 1024px) {
     #evoCont {
-        padding-bottom: 5rem;
+        padding-bottom: 3rem;
+        max-height: none;
     }
 }
 
