@@ -161,6 +161,7 @@ function PopulateEvoData() {
                 await GetPokemonData(thisMon.id);
                 await PopulateData();
                 AdaptiveBackgrounds();
+                window.scrollTo({top: 0, behavior: 'instant'});
             });
 
             let p = document.createElement('p');
