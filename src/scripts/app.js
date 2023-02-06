@@ -65,6 +65,7 @@ function GetEnglishFlavText() {
 }
 
 async function PopulateData() {
+    isShiny = false;
     pokNameTxt.textContent = CapCase(pokData.name);
     pokNumTxt.textContent = '#' + String(pokData.id).padStart(3, '0');
     pokImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokData.id}.png`;
