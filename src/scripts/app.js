@@ -21,9 +21,9 @@ async function GetPokemonData(pokemon = searchBar.value.toLowerCase()) {
 
     let pokResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
     pokData = await pokResp.json();
+    pokId = pokData.id;
     let specResp = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
     specData = await specResp.json();
-    pokId = await pokData.id;
     if (specData.evolution_chain !== null) {
         let evoUrl = specData.evolution_chain.url;
         let evoResp = await fetch(evoUrl);
