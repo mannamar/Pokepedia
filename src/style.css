@@ -27,12 +27,28 @@ p {
     /* padding-bottom: 5rem; */
 }
 
-#pokImg {
+#pokImg,
+.evoImg {
     transition: transform .1s;
 }
 
-#pokImg:hover {
+#pokImg:hover,
+.evoImg:hover {
     transform: scale(1.05);
+}
+
+.evoCol {
+    width: 25%;
+}
+
+.evoImg {
+    width: 80%;
+}
+
+.ph-arrow-right-bold {
+    color: white;
+    font-size: 22px;
+    text-shadow: 0 0 12px rgba(0,0,0,.25);
 }
 
 @media (max-width: 1024px) {
@@ -116,7 +132,8 @@ p {
 }
 
 @media (hover: none) {
-    #pokImg:hover {
+    #pokImg:hover,
+    .evoImg:hover {
         transform: none;
     }
 
