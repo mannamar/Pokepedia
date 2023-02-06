@@ -98,7 +98,7 @@ function ParseEvoData() {
         console.warn('No evo path');
         let evoBase = {};
         evoBase.name = CapCase(pokData.name);
-        evoBase.id = pokData.name;
+        evoBase.id = pokData.id;
         allEvoPaths.push([evoBase]);
     } else {
         let evoBase = {};
@@ -127,7 +127,7 @@ function ParseEvoData() {
     if (allEvoPaths.length === 0) {
         let evoBase = {};
         evoBase.name = CapCase(pokData.name);
-        evoBase.id = pokData.name;
+        evoBase.id = pokData.id;
         allEvoPaths.push([evoBase]);
     }
 }
@@ -135,12 +135,45 @@ function ParseEvoData() {
 function PopulateEvoData() {
     evoCont.innerHTML = '';
     for (let i = 0; i < allEvoPaths.length; i++) {
-        let pEvo = document.createElement('p');
-        pEvo.textContent = allEvoPaths[i].map(data => data.name).join(' --> ');
-        pEvo.classList.add('text-2xl', 'mt-2');
-        evoCont.append(pEvo);
+        // let pEvo = document.createElement('p');
+        // pEvo.textContent = allEvoPaths[i].map(data => data.name).join(' --> ');
+        // pEvo.classList.add('text-2xl', 'mt-2');
+        // evoCont.append(pEvo);
+        let thisPath = allEvoPaths[i];
+        console.log(thisPath);
+        let outterDiv = document.createElement('div');
+        outterDiv.classList.add('flex', 'items-center', 'justify-center');
+        for (let j = 0; j < thisPath.length; j++) {
+            let thisMon = thisPath[j];
+
+            let innerDiv = document.createElement('div');
+            innerDiv.classList.add('evoCol');
+            
+            if (j > 0) {
+                let iCon = document.createElement('i');
+                iCon.classList.add('ph-arrow-right-bold');
+                outterDiv.append(iCon);
+            }
+            let img = document.createElement('img');
+            img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thisMon.id}.png`
+            img.classList.add('evoImg', 'mx-auto');
+            img.addEventListener('click', async function() {
+                await GetPokemonData(thisMon.id);
+                await PopulateData();
+                AdaptiveBackgrounds();
+            });
+
+            let p = document.createElement('p');
+            p.textContent = thisMon.name;
+            p.classList.add('text-center');
+
+            innerDiv.append(img, p);
+            outterDiv.append(innerDiv);
+        }
+        evoCont.append(outterDiv);
     }
     // console.log(allEvoPaths);
+
 }
 
 searchBtn.addEventListener('click', async function() {
