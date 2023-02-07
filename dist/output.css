@@ -1000,6 +1000,10 @@ p {
   .text-8xl {
     font-size: 4rem;
   }
+
+  .evoCol {
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 425px) {
