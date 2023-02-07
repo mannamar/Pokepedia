@@ -1,6 +1,6 @@
 import { AdaptiveBackgrounds } from './adaptive-backgrounds.js'
 
-import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage } from "./localstorage.js";
+import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage, getLocalFavData, saveLocalFavData } from "./localstorage.js";
 
 // import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
 
@@ -215,11 +215,13 @@ pokImg.addEventListener('click', function() {
 
 heartImg.addEventListener('click', function() {
     let favorites = getLocalStorage();
+    let favData = getLocalFavData();
     // console.log(pokId);
     if (favorites.includes(pokId)) {
         removeFromLocalStorage(pokId);
     } else {
         saveToLocalStorageByName(pokId);
+        saveLocalFavData(pokId, CapCase(pokData.name), document.body.style.backgroundColor);
     }
     heartImg.classList.toggle('ph-heart-fill');
     heartImg.classList.toggle('ph-heart');
@@ -238,12 +240,26 @@ drawerXBtn.addEventListener('click', function() {
 function CreateElements() {
     favBox.innerHTML = '';
     let favorites = getLocalStorage();
+    let favData = getLocalFavData();
     
     favorites.map(pokNum => {
+        let div = document.createElement('div');
+        div.classList.add('favPokBox', 'mx-auto', 'flex', 'items-end');
+        div.style.background = favData[pokNum].color;
+
+        let p1 = document.createElement('p');
+        p1.classList.add('favPokNum');
+        p1.textContent = '#' + String(pokNum).padStart(3, '0');
+
+        let p2 = document.createElement('p');
+        p2.classList.add('favPokName');
+        p2.textContent = favData[pokNum].name;
+
         let img = document.createElement('img');
+        img.classList.add('favPokImg');
         img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokNum}.png`;
-        img.type = 'button';
-        img.setAttribute('data-drawer-hide', 'favDrawer');
+        // img.type = 'button';
+        // img.setAttribute('data-drawer-hide', 'favDrawer');
 
         // let deleteBtn = document.createElement('button');
         // deleteBtn.className = 'btn btn-danger';
@@ -252,14 +268,14 @@ function CreateElements() {
         // deleteBtn.addEventListener('click', function() {
         //     removeFromLocalStorage(person);
         // });
-        img.addEventListener('click', async function() {
+        div.addEventListener('click', async function() {
             await GetPokemonData(pokNum);
             await PopulateData();
             AdaptiveBackgrounds();
             drawer.hide();
         });
-
-        favBox.appendChild(img);
+        div.append(p1, p2, img);
+        favBox.appendChild(div);
         // favDrawer.appendChild(deleteBtn);
     })
 

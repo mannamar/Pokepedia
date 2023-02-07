@@ -24,6 +24,24 @@ function getLocalStorage() {
     return JSON.parse(localStorageData);
 }
 
+function getLocalFavData() {
+    let localFavData = localStorage.getItem('FavData');
+
+    if (localFavData === null) {
+        return {};
+    }
+
+    return JSON.parse(localFavData);
+}
+
+function saveLocalFavData(num, name, color) {
+    let favData = getLocalFavData();
+
+    favData[num] = {name: name, color: color};
+
+    localStorage.setItem('FavData', JSON.stringify(favData));
+}
+
 function removeFromLocalStorage(name) {
     let favorites = getLocalStorage();
 
@@ -37,4 +55,4 @@ function removeFromLocalStorage(name) {
     localStorage.setItem('Favorites', JSON.stringify(favorites));
 }
 
-export { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage };
+export { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage, getLocalFavData, saveLocalFavData };

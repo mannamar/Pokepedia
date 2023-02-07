@@ -681,10 +681,6 @@ video {
   width: 1.25rem;
 }
 
-.w-2\/3 {
-  width: 66.666667%;
-}
-
 .w-96 {
   width: 24rem;
 }
@@ -708,6 +704,10 @@ video {
 
 .content-center {
   align-content: center;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -934,13 +934,16 @@ p {
 }
 
 #pokImg,
-.evoImg {
+.evoImg,
+.favPokBox {
   transition: transform .1s;
 }
 
 #pokImg:hover,
-.evoImg:hover {
+.evoImg:hover,
+.favPokBox:hover {
   transform: scale(1.05);
+  cursor: pointer;
 }
 
 .evoCol {
@@ -959,6 +962,32 @@ p {
   color: white;
   font-size: 22px;
   text-shadow: 0 0 12px rgba(0,0,0,.25);
+}
+
+.favPokBox {
+  width: 90%;
+  height: 75px;
+  border-radius: 10px;
+  background-color: rgb(140, 199, 172);
+  margin-top: 25px;
+}
+
+.favPokImg {
+  height: 90%;
+  margin-left: auto;
+  padding-right: 10px;
+}
+
+.favPokNum {
+  font-size: 14px;
+  padding-left: 15px;
+  padding-bottom: 8px;
+}
+
+.favPokName {
+  font-size: 21px;
+  padding-left: 5px;
+  padding-bottom: 4px;
 }
 
 @media (max-width: 1023px) {
@@ -1046,7 +1075,8 @@ p {
 
 @media (hover: none) {
   #pokImg:hover,
-    .evoImg:hover {
+    .evoImg:hover,
+    .favPokBox:hover {
     transform: none;
   }
 
