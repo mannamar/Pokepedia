@@ -29,6 +29,7 @@ function getLocalFavData() {
 
     if (localFavData === null) {
         localStorage.setItem('Favorites', '[]');
+        localStorage.setItem('FavData', '{}');
         return {};
     }
 
