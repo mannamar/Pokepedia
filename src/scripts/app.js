@@ -141,7 +141,7 @@ function PopulateEvoData() {
         // evoCont.append(pEvo);
         let thisPath = allEvoPaths[i];
         let outterDiv = document.createElement('div');
-        outterDiv.classList.add('flex', 'items-center', 'justify-center');
+        outterDiv.classList.add('flex', 'items-center', 'justify-center', 'evoBranch');
         for (let j = 0; j < thisPath.length; j++) {
             let thisMon = thisPath[j];
 
