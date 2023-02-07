@@ -239,8 +239,8 @@ drawerXBtn.addEventListener('click', function() {
 
 function CreateElements() {
     favBox.innerHTML = '';
-    let favorites = getLocalStorage();
     let favData = getLocalFavData();
+    let favorites = getLocalStorage();
     
     favorites.map(pokNum => {
         let div = document.createElement('div');
