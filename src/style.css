@@ -91,6 +91,24 @@ p {
     padding-bottom: 4px;
 }
 
+.typeIconCont {
+    width: 110px;
+    background-color: #63bd5b;
+    border-radius: 15px;
+    margin-right: 10px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+}
+
+.purple {
+    background-color: #ab6ac8;
+}
+
+.typeImg {
+    padding-left: 5px;
+    height: 29px;
+    text-shadow: 0 0 12px rgba(0,0,0,.25);
+}
+
 @media (max-width: 1023px) {
     #evoCont {
         padding-bottom: 3rem;
@@ -99,6 +117,20 @@ p {
 }
 
 @media (max-width: 640px) {
+
+    .typeIconCont {
+        margin-top: 2px;
+        width: 83px;
+        height: 25px;
+    }
+
+    .typeTxt {
+        font-size: 12px;
+    }
+
+    .typeImg {
+        height: 20px;
+    }
     
     #btnCont {
         justify-content: space-between;
@@ -135,6 +167,8 @@ p {
     .evoCol {
         font-size: 13px;
     }
+
+
 }
 
 @media (max-width: 425px) {

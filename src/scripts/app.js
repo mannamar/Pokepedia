@@ -13,8 +13,9 @@ let isShiny = false;
 
 let searchBar = document.getElementById('searchBar');
 let searchBtn = document.getElementById('searchBtn');
-let typeTxt = document.getElementById('typeTxt');
+// let typeTxt = document.getElementById('typeTxt');
 let evoCont = document.getElementById('evoCont');
+let typeColors = { Bug: '#90c12c', Dark: '#5a5366', Dragon: '#0a6dc4', Electric: '#f3d23b', Fairy: '#ec8fe6', Fighting: '#ce4069', Fire: '#ff9c54', Flying: '#8fa8dd', Ghost: '#5269ac', Grass: '#63bd5b', Ground: '#d97746', Ice: '#74cec0', Normal: '#9099a1', Poison: '#ab6ac8', Psychic: '#f97176', Rock: '#c7b78b', Steel: '#5a8ea1', Water: '#4d90d5' }
 
 async function GetPokemonData(pokemon = searchBar.value.toLowerCase()) {
     searchBar.value = '';
@@ -75,7 +76,8 @@ async function PopulateData() {
     locTxt.textContent = CapCase(location).replace(' Area', '');
 
     let types = pokData.types.map(data => CapCase(data.type.name));
-    typeTxt.textContent = types.join(', ');
+    // typeTxt.textContent = types.join(', ');
+    PopulateTypeIcons(types);
 
     let abilities = pokData.abilities.map( data => CapCase(data.ability.name));
     abilTxt.textContent = abilities.join(', ');
@@ -90,6 +92,24 @@ async function PopulateData() {
     ParseEvoData();
     PopulateEvoData();
 
+}
+
+function PopulateTypeIcons(types) {
+    typeCont.innerHTML = '';
+    for (let i = 0; i < types.length; i++) {
+        let div = document.createElement('div');
+        div.classList.add('typeIconCont', 'flex', 'items-center');
+        div.style.backgroundColor = typeColors[types[i]];
+        let img = document.createElement('img');
+        img.src = `./assets/types/${types[i]}.png`;
+        img.classList.add('typeImg');
+        let p = document.createElement('p');
+        p.classList.add('typeTxt', 'mx-auto', 'pr-4');
+        p.textContent = types[i];
+
+        div.append(img, p);
+        typeCont.append(div);
+    }
 }
 
 function ParseEvoData() {
