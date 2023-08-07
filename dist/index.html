@@ -1,0 +1,167 @@
+<!-- 
+    Amardeep Mann
+    2/4/23
+    Pokemon API
+    We used our knowledge of JS to create a fully functional and responsive Pokedex styled with Tailwind
+    ** To see the shiny form please click on the Pokemon Image**
+    ** Moves list is a scrollable box **
+    ** To add/remove an item from favorites you must click the heart **
+    Azure Link: https://pokepedia.azurewebsites.net/src/
+    Figma Link: https://www.figma.com/file/1EvaqYRohtD3nCQLRjv4ks/Pokepedia?node-id=0%3A1&t=MKYWFzmzROx3y0Mi-1
+ -->
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokepedia</title>
+    <link rel="icon" type="image/x-icon" href="./assets/pokeball.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+    <!-- <link href="/dist/output.css" rel="stylesheet"> -->
+    <link href="./output.css" rel="stylesheet">
+    <link rel="stylesheet" href="./awesomeplete/awesomplete.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+</head>
+
+<body>
+
+    <!-- Offcanvas Drawer-->
+    <div id="favDrawer" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
+        <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><img class="w-5 h-5 mr-2" aria-hidden="true" src="./assets/pokeball.ico"></svg>Favorites</h5>
+        <button id="drawerXBtn" type="button" aria-controls="favDrawer" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        <span class="sr-only">Close menu</span>
+        </button>
+
+        <div id="favBox" class="mx-auto">
+            <div class="favPokBox mx-auto flex items-end">
+                <p class="favPokNum">#001</p>
+                <p class="favPokName">Bulbasaur</p>
+                <img class="favPokImg" src="./assets/1.png" alt="">
+            </div>
+            <div class="favPokBox mx-auto flex items-end">
+                <p class="favPokNum">#002</p>
+                <p class="favPokName">Ivysaur</p>
+                <img class="favPokImg" src="./assets/2.png" alt="">
+            </div>
+            <div class="favPokBox mx-auto flex items-end">
+                <p class="favPokNum">#002</p>
+                <p class="favPokName">Venusaur</p>
+                <img class="favPokImg" src="./assets/3.png" alt="">
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="bigCont" class="container mx-auto px-10">
+        <!-- Old Logo -->
+        <!-- <img src="./assets/logo.png" alt="" class="w-96 mx-auto"> -->
+  
+        <div class="grid grid-cols-5 gap-x-16 content-center">
+            
+            <div id="topCont" class="container col-span-5">
+                <p id="titleTxt" class="text-8xl mt-16">Pokepedia</p>
+                <div id="btnCont" class="flex flex-wrap mt-5">
+                    <input id="searchBar" type="text" placeholder="Pokemon name/number" class="px-3 py-1">
+                    <button id="searchBtn" class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-5">Search</button>
+                    <button id="randBtn" class="btn bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Random</button>
+                    <button id="favBtn" class="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-5" type="button" aria-controls="favDrawer">Favorites</button>
+                </div>
+            </div>
+
+            <div id="leftCont" class="container col-span-5 lg:col-span-3">
+
+
+                <div class="flex items-baseline py-10">
+                    <p id="pokNumTxt" class="text-2xl">#001</p>
+                    <p id="pokNameTxt" class="text-5xl px-5">Bulbasaur</p>
+                    <i id="heartImg" class="ph-heart text-4xl text-white"></i>
+                </div>
+
+                <img id="pokImg" src="./assets/1.png" alt="Bulbasaur" class="mx-auto" data-adaptive-background="1">
+
+                <p id="flavTxt" class="text-3xl py-9">A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.</p>
+            </div>
+
+            <div id="rightCont" class="container col-span-5 lg:col-span-2">
+                <p id="infoTitle" class="text-3xl mt-14">Info</p>
+                <div class="flex w-full mt-5">
+                    <p class="shortCol text-2xl">Type:</p>
+                    <div id="typeCont" class="longCol flex">
+                        <div class="typeIconCont flex items-center">
+                            <img class="typeImg" src="./assets/types/Grass.png" alt="">
+                            <p class="typeTxt mx-auto pr-4">Grass</p>
+                        </div>
+                        <div class="typeIconCont flex items-center purple">
+                            <img class="typeImg" src="./assets/types/Poison.png" alt="">
+                            <p class="typeTxt mx-auto pr-4">Poison</p>
+                        </div>
+                    </div>
+                    <!-- <p id="typeTxt" class="text-2xl longCol">Grass, Poison</p> -->
+                </div>
+
+                <div class="flex w-full mt-2">
+                    <p class="shortCol text-2xl">Location:</p>
+                    <div class="longCol">
+                        <p id="locTxt" class="text-2xl">Cerulean City</p>
+                    </div>
+                </div>
+        
+                <div class="flex w-full mt-2">
+                    <p class="shortCol text-2xl">Abilities:</p>
+                    <p id="abilTxt" class="text-2xl longCol">Overgrow, Chlorophyll</p>
+                </div>
+
+                <div class="flex w-full mt-2">
+                    <p class="shortCol text-2xl">Moves:</p>
+                    <div class="longCol max-h-24 overflow-y-scroll">
+                        <p id="movTxt" class="text-2xl">Razor Wind, Swords Dance, Cut, Bind, Vine Whip, Headbutt, Tackle, Body Slam, Take Down, Double Edge, Growl, Strength, Mega Drain, Leech Seed, Growth, Razor Leaf, Solar Beam, Poison Powder, Sleep Powder, Petal Dance, String Shot, Toxic, Rage, Mimic, Double Team, Defense Curl, Light Screen, Reflect, Bide, Sludge, Skull Bash, Amnesia, Flash, Rest, Substitute, Snore, Curse, Protect, Sludge Bomb, Mud Slap, Outrage, Giga Drain, Endure, Charm, False Swipe, Swagger, Fury Cutter, Attract, Sleep Talk, Return, Frustration, Safeguard, Sweet Scent, Synthesis, Hidden Power, Sunny Day, Rock Smash, Facade, Nature Power, Helping Hand, Ingrain, Knock Off, Secret Power, Weather Ball, Grass Whistle, Bullet Seed, Magical Leaf, Natural Gift, Worry Seed, Seed Bomb, Energy Ball, Leaf Storm, Power Whip, Captivate, Grass Knot, Venoshock, Round, Echoed Voice, Grass Pledge, Work Up, Grassy Terrain, Confide, Grassy Glide</p>
+                    </div>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="longCol max-h-28 overflow-y-scroll">
+                    </div>
+                </div>
+                
+                <p class="text-3xl mt-10">Evolutions</p>
+                <div id="evoCont">
+
+                    <div class="flex items-center justify-center">
+
+                        <div class="evoCol">
+                            <img class="evoImg mx-auto" src="./assets/1.png" alt="Bulbasaur">
+                            <p class="text-center">Bulbasaur</p>
+                        </div>
+                        <i class="ph-arrow-right-bold"></i>
+                        <div class="evoCol">
+                            <img class="evoImg mx-auto" src="./assets/2.png" alt="Ivysaur">
+                            <p class="text-center">Ivysaur</p>
+                        </div>
+                        <i class="ph-arrow-right-bold"></i>
+                        <div class="evoCol">
+                            <img class="evoImg mx-auto" src="./assets/3.png" alt="Venasaur">
+                            <p class="text-center">Venusaur</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="./awesomeplete/awesomplete.js"></script>
+    <script type="module" src="./scripts/app.js"></script>
+    <!-- <script type="text/javascript" src="./scripts/adaptive-backgrounds.js"></script> -->
+</body>
+
+</html>
