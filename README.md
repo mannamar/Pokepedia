@@ -1,6 +1,6 @@
-<h3 align="center" style="font-size: 40px">
+<h1 align="center" style="font-size: 40px">
      Pokepedia
-</h3>
+</h1>
 
 <p align="center">
 <a href="https://pokepedia.vercel.app/"><img src="https://img.shields.io/badge/Deployment-Live-Green?logo=googlechrome&logoColor=lightgray" alt="Deployment Badge" /></a>
@@ -22,4 +22,4 @@
 
 ## Preview
 
-<img src="./public/preview.jpg" alt="Desktop preview" />
+<img src="./preview/preview.jpg" alt="Desktop preview" />
