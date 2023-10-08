@@ -5,7 +5,7 @@
 <a href="https://www.figma.com/file/1EvaqYRohtD3nCQLRjv4ks/Pokepedia?type=design&node-id=0%3A1&mode=design&t=rVSGszuvoKNmCrYB-1" target="_blank"><img src="https://img.shields.io/badge/Prototype-Public-Green?logo=figma&logoColor=lightgray" alt="Prototype Badge" /></a>
 </p>
 
-**Pokepedia** is a modern Pokemon encyclopedia powered by the <a href="https://pokeapi.co/" target="_blank">PokeAPI</a>
+<a href="https://pokepedia.vercel.app/" target="_blank">**Pokepedia**</a> is a modern Pokemon encyclopedia powered by the <a href="https://pokeapi.co/" target="_blank">PokeAPI</a>
 
 ## Features
 
