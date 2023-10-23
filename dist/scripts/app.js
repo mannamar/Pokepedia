@@ -176,7 +176,10 @@ function PopulateEvoData() {
             }
             let img = document.createElement('img');
             // Pokemon like #1007 don't have gif
-            img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${thisMon.id}.gif`
+            img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${thisMon.id}.gif`;
+            if(!img.complete){ 
+                img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thisMon.id}.png`;
+            }
             // img.src = `./assets/artwork/${thisMon.id}.png`
             img.classList.add('evoImg', 'mx-auto');
             img.addEventListener('click', async function() {
