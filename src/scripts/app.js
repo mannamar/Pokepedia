@@ -174,12 +174,13 @@ function PopulateEvoData() {
                 iCon.classList.add('ph-arrow-right-bold');
                 outterDiv.append(iCon);
             }
-            let img = document.createElement('img');
+            
+            let img = new Image();
             img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${thisMon.id}.gif`;
-            if(!img.complete){ 
+            img.onerror = function() {
                 img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thisMon.id}.png`;
+                img.onerror = null;
             }
-            // img.src = `./assets/artwork/${thisMon.id}.png`
             img.classList.add('evoImg', 'mx-auto');
             img.addEventListener('click', async function() {
                 await GetPokemonData(thisMon.id);
