@@ -950,12 +950,24 @@ p {
   cursor: pointer;
 }
 
+#heartImg:hover {
+  cursor: pointer;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat{
+  30% {
+    transform: scale(1.1);
+  }
+}
+
 .evoCol {
   width: 28%;
 }
 
 .evoImg {
-  width: 80%;
+  /* width: 80%; */
+  height: 70px;
 }
 
 .evoBranch {
@@ -1111,6 +1123,7 @@ p {
 
 @media (hover: none) {
   #pokImg:hover,
+    #heartImg:hover,
     .evoImg:hover,
     .favPokBox:hover {
     transform: none;
