@@ -934,7 +934,7 @@ p {
   /* margin-top: 1.25rem; */
   /* padding-bottom: 5rem; */
   max-height: 320px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #pokImg,
