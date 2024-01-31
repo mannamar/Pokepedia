@@ -19,6 +19,10 @@ p {
     text-shadow: 0 0 12px rgba(0,0,0,.25);
 }
 
+#searchBar {
+    height: 40px;
+}
+
 .shortCol {
     width: 30%;
 }
@@ -64,6 +68,7 @@ p {
 
 .evoImg {
     /* width: 80%; */
+    height: 70px;
 }
 
 .evoBranch {
@@ -118,6 +123,35 @@ p {
     padding-left: 5px;
     height: 29px;
     text-shadow: 0 0 12px rgba(0,0,0,.25);
+}
+
+.autocomplete-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.autocomplete-list {
+    position: absolute;
+    width: 100%;
+}
+
+.autocomplete-list li {
+    background-color: white;
+    border: 1px solid rgb(206, 206, 206);;
+    border-top: unset;
+}
+
+.autocomplete-list li:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+.autocomplete-list button {
+    border: unset;
+    background: unset;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.5em;
 }
 
 @media (max-width: 1023px) {
@@ -227,6 +261,7 @@ p {
 
 @media (hover: none) {
     #pokImg:hover,
+    #heartImg:hover,
     .evoImg:hover,
     .favPokBox:hover {
         transform: none;

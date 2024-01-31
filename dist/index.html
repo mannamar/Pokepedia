@@ -67,7 +67,20 @@
             <div id="topCont" class="container col-span-5">
                 <p id="titleTxt" class="text-8xl mt-16">Pokepedia</p>
                 <div id="btnCont" class="flex flex-wrap mt-5">
-                    <input id="searchBar" type="text" placeholder="Pokemon name/number" class="px-3 py-1">
+                    <div class="autocomplete-wrapper">
+                        <input id="searchBar" type="text" placeholder="Pokemon name/number" class="px-3 py-1">
+                        <ul class="autocomplete-list">
+                            <li>
+                                <button>Bulbasaur</button>
+                            </li>
+                            <li>
+                                <button>Charmander</button>
+                            </li>
+                            <li>
+                                <button>Squirtle</button>
+                            </li>
+                        </ul>
+                    </div>
                     <button id="searchBtn" class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-5">Search</button>
                     <button id="randBtn" class="btn bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Random</button>
                     <button id="favBtn" class="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-5" type="button" aria-controls="favDrawer">Favorites</button>
@@ -161,6 +174,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <script src="./awesomeplete/awesomplete.js"></script>
     <script type="module" src="./scripts/app.js"></script>
+    <script type="module" src="./scripts/autocomplete.js"></script>
     <!-- <script type="text/javascript" src="./scripts/adaptive-backgrounds.js"></script> -->
 </body>
 

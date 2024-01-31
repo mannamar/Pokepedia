@@ -3,6 +3,8 @@ import { AdaptiveBackgrounds } from './adaptive-backgrounds.js'
 import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage, getLocalFavData, saveLocalFavData } from "./localstorage.js";
 
 // import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
+import pokemonData from '../data/pokemonData.json' assert { type: 'json' };
+console.log(pokemonData);
 
 const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
