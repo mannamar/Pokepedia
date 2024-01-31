@@ -23,6 +23,7 @@ let typeColors = { Bug: '#90c12c', Dark: '#5a5366', Dragon: '#0a6dc4', Electric:
 
 async function GetPokemonData(pokemon = searchBar.value.toLowerCase()) {
     searchBar.value = '';
+    autoList.textContent = '';
 
     let pokResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
     pokData = await pokResp.json();
