@@ -136,13 +136,13 @@ p {
 }
 
 .autocomplete-list li {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
     border: 1px solid rgb(206, 206, 206);;
     border-top: unset;
 }
 
 .autocomplete-list li:hover {
-    background-color: rgb(206, 206, 206);
+    background-color: rgb(206, 206, 206, .95);
 }
 
 .autocomplete-list button {

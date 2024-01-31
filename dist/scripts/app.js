@@ -15,6 +15,7 @@ let isShiny = false;
 
 let searchBar = document.getElementById('searchBar');
 let searchBtn = document.getElementById('searchBtn');
+let autoList = document.getElementById('autoList');
 // let typeTxt = document.getElementById('typeTxt');
 let evoCont = document.getElementById('evoCont');
 let typeColors = { Bug: '#90c12c', Dark: '#5a5366', Dragon: '#0a6dc4', Electric: '#f3d23b', Fairy: '#ec8fe6', Fighting: '#ce4069', Fire: '#ff9c54', Flying: '#8fa8dd', Ghost: '#5269ac', Grass: '#63bd5b', Ground: '#d97746', Ice: '#74cec0', Normal: '#9099a1', Poison: '#ab6ac8', Psychic: '#f97176', Rock: '#c7b78b', Steel: '#5a8ea1', Water: '#4d90d5' };
@@ -225,6 +226,41 @@ searchBar.addEventListener('keypress', async function(key) {
         AdaptiveBackgrounds();
     }
 })
+
+searchBar.addEventListener('input', function() {
+    console.log(searchBar.value);
+    const inputValue = searchBar.value.toLowerCase();
+
+    if (inputValue.length === 0) {
+        autoList.textContent = '';
+    } else if (isNaN(inputValue)) {
+        let filteredData = pokemonData.results.filter(x => x.name.startsWith(inputValue)).slice(0,11);
+        console.log(filteredData);
+        createAutocompleteList(filteredData);
+    } else {
+        let filteredData = pokemonData.results.filter(x => x.num.startsWith(inputValue)).slice(0,11);
+        console.log(filteredData);
+        createAutocompleteList(filteredData);
+    }
+});
+
+function createAutocompleteList(arr) {
+    autoList.textContent = '';
+
+    arr.forEach(item => {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.innerHTML = item.name;
+        button.addEventListener('click', async function() {
+            autoList.textContent = '';
+            await GetPokemonData(item.num);
+            await PopulateData();
+            AdaptiveBackgrounds();
+        });
+        li.appendChild(button);
+        autoList.appendChild(li);
+    });
+}
 
 randBtn.addEventListener('click', async function() {
     await GetPokemonData(Math.floor(Math.random() * 1008) + 1);
