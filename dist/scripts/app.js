@@ -3,6 +3,16 @@ import { AdaptiveBackgrounds } from './adaptive-backgrounds.js'
 import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage, getLocalFavData, saveLocalFavData } from "./localstorage.js";
 
 // import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
+// import pokemonData from '../data/pokemonData.json' assert { type: 'json' };
+// const { default: pokemonData } = await import("../data/pokemonData.json", { assert: { type: "json" } });
+
+async function GetLocalData() {
+    let resp = await fetch('./data/pokemonData.json');
+    return await resp.json();
+}
+
+let pokemonData = await GetLocalData();
+// console.log(pokemonData)
 
 const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
@@ -13,12 +23,15 @@ let isShiny = false;
 
 let searchBar = document.getElementById('searchBar');
 let searchBtn = document.getElementById('searchBtn');
+let autoWrap = document.getElementById('autoWrap');
+let autoList = document.getElementById('autoList');
 // let typeTxt = document.getElementById('typeTxt');
 let evoCont = document.getElementById('evoCont');
 let typeColors = { Bug: '#90c12c', Dark: '#5a5366', Dragon: '#0a6dc4', Electric: '#f3d23b', Fairy: '#ec8fe6', Fighting: '#ce4069', Fire: '#ff9c54', Flying: '#8fa8dd', Ghost: '#5269ac', Grass: '#63bd5b', Ground: '#d97746', Ice: '#74cec0', Normal: '#9099a1', Poison: '#ab6ac8', Psychic: '#f97176', Rock: '#c7b78b', Steel: '#5a8ea1', Water: '#4d90d5' };
 
 async function GetPokemonData(pokemon = searchBar.value.toLowerCase()) {
     searchBar.value = '';
+    autoList.textContent = '';
 
     let pokResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
     pokData = await pokResp.json();
@@ -214,6 +227,7 @@ searchBtn.addEventListener('click', async function() {
 
 searchBar.addEventListener('keypress', async function(key) {
     if (key.key === 'Enter') {
+        autoList.textContent = '';
         if (searchBar.value === '') {
             console.warn('Empty search')
             return;
@@ -223,6 +237,58 @@ searchBar.addEventListener('keypress', async function(key) {
         AdaptiveBackgrounds();
     }
 })
+
+searchBar.addEventListener('input', function() {
+    const inputValue = searchBar.value.toLowerCase();
+
+    if (inputValue.length === 0) {
+        autoList.textContent = '';
+    } else if (isNaN(inputValue)) {
+        let filteredData = pokemonData.results.filter(x => x.name.startsWith(inputValue)).slice(0,11);
+        createAutocompleteList(filteredData);
+    } else {
+        let filteredData = pokemonData.results.filter(x => x.num.startsWith(inputValue)).slice(0,11);
+        createAutocompleteList(filteredData);
+    }
+});
+
+searchBar.addEventListener('focus', function() {
+    autoList.classList.remove('hidden');
+});
+
+searchBar.addEventListener('blur', function() {
+    setTimeout(function(){
+        autoList.classList.add('hidden');
+    }, 150);
+});
+
+function createAutocompleteList(arr) {
+    autoList.textContent = '';
+
+    arr.forEach(item => {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        const span = document.createElement('span');
+        span.classList.add('flex');
+        const img = document.createElement('img');
+        img.classList.add('h-10', 'ml-1');
+        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.num}.png`
+        const div = document.createElement('div');
+        div.classList.add('mt-3', 'ml-2');
+        div.innerText = `${item.num}. ${item.name}`
+        // button.innerHTML = item.name;
+        button.addEventListener('click', async function() {
+            autoList.textContent = '';
+            await GetPokemonData(item.num);
+            await PopulateData();
+            AdaptiveBackgrounds();
+        });
+        span.append(img, div);
+        button.append(span);
+        li.appendChild(button);
+        autoList.appendChild(li);
+    });
+}
 
 randBtn.addEventListener('click', async function() {
     await GetPokemonData(Math.floor(Math.random() * 1008) + 1);
@@ -244,7 +310,6 @@ pokImg.addEventListener('click', function() {
 heartImg.addEventListener('click', function() {
     let favorites = getLocalStorage();
     let favData = getLocalFavData();
-    // console.log(pokId);
     if (favorites.includes(pokId)) {
         removeFromLocalStorage(pokId);
     } else {
