@@ -4,7 +4,6 @@ import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage, getL
 
 // import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
 import pokemonData from '../data/pokemonData.json' assert { type: 'json' };
-console.log(pokemonData);
 
 const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
@@ -231,18 +230,15 @@ searchBar.addEventListener('keypress', async function(key) {
 })
 
 searchBar.addEventListener('input', function() {
-    console.log(searchBar.value);
     const inputValue = searchBar.value.toLowerCase();
 
     if (inputValue.length === 0) {
         autoList.textContent = '';
     } else if (isNaN(inputValue)) {
         let filteredData = pokemonData.results.filter(x => x.name.startsWith(inputValue)).slice(0,11);
-        console.log(filteredData);
         createAutocompleteList(filteredData);
     } else {
         let filteredData = pokemonData.results.filter(x => x.num.startsWith(inputValue)).slice(0,11);
-        console.log(filteredData);
         createAutocompleteList(filteredData);
     }
 });
@@ -305,7 +301,6 @@ pokImg.addEventListener('click', function() {
 heartImg.addEventListener('click', function() {
     let favorites = getLocalStorage();
     let favData = getLocalFavData();
-    // console.log(pokId);
     if (favorites.includes(pokId)) {
         removeFromLocalStorage(pokId);
     } else {
