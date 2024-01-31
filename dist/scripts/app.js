@@ -254,7 +254,6 @@ searchBar.addEventListener('blur', function() {
     setTimeout(function(){
         autoList.classList.add('hidden');
     }, 150);
-    // autoList.classList.add('hidden');
 });
 
 function createAutocompleteList(arr) {
