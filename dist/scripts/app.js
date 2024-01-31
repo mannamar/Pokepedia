@@ -15,6 +15,7 @@ let isShiny = false;
 
 let searchBar = document.getElementById('searchBar');
 let searchBtn = document.getElementById('searchBtn');
+let autoWrap = document.getElementById('autoWrap');
 let autoList = document.getElementById('autoList');
 // let typeTxt = document.getElementById('typeTxt');
 let evoCont = document.getElementById('evoCont');
@@ -217,6 +218,7 @@ searchBtn.addEventListener('click', async function() {
 
 searchBar.addEventListener('keypress', async function(key) {
     if (key.key === 'Enter') {
+        autoList.textContent = '';
         if (searchBar.value === '') {
             console.warn('Empty search')
             return;
@@ -244,19 +246,40 @@ searchBar.addEventListener('input', function() {
     }
 });
 
+searchBar.addEventListener('focus', function() {
+    autoList.classList.remove('hidden');
+});
+
+searchBar.addEventListener('blur', function() {
+    setTimeout(function(){
+        autoList.classList.add('hidden');
+    }, 150);
+    // autoList.classList.add('hidden');
+});
+
 function createAutocompleteList(arr) {
     autoList.textContent = '';
 
     arr.forEach(item => {
         const li = document.createElement('li');
         const button = document.createElement('button');
-        button.innerHTML = item.name;
+        const span = document.createElement('span');
+        span.classList.add('flex');
+        const img = document.createElement('img');
+        img.classList.add('h-10', 'ml-1');
+        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.num}.png`
+        const div = document.createElement('div');
+        div.classList.add('mt-3', 'ml-2');
+        div.innerText = `${item.num}. ${item.name}`
+        // button.innerHTML = item.name;
         button.addEventListener('click', async function() {
             autoList.textContent = '';
             await GetPokemonData(item.num);
             await PopulateData();
             AdaptiveBackgrounds();
         });
+        span.append(img, div);
+        button.append(span);
         li.appendChild(button);
         autoList.appendChild(li);
     });
