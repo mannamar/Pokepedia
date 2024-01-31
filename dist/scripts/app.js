@@ -4,7 +4,15 @@ import { saveToLocalStorageByName, getLocalStorage, removeFromLocalStorage, getL
 
 // import pokemonNames from '../data/pokemonNames.json' assert { type: 'json' };
 // import pokemonData from '../data/pokemonData.json' assert { type: 'json' };
-const { default: pokemonData } = await import("../data/pokemonData.json", { assert: { type: "json" } });
+// const { default: pokemonData } = await import("../data/pokemonData.json", { assert: { type: "json" } });
+
+async function GetLocalData() {
+    let resp = await fetch('./data/pokemonData.json');
+    return await resp.json();
+}
+
+let pokemonData = await GetLocalData();
+// console.log(pokemonData)
 
 const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
