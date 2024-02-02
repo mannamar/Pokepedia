@@ -288,6 +288,7 @@ function createAutocompleteList(arr) {
         li.appendChild(button);
         autoList.appendChild(li);
     });
+    new SimpleBar(document.getElementById('autoList'));
 }
 
 randBtn.addEventListener('click', async function() {
