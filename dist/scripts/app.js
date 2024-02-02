@@ -18,7 +18,7 @@ const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
 const drawer = new Drawer(favDrawer);
 
-let pokData, specData, pokId, encData, evoData, allEvoPaths;
+let pokData, specData, pokId, encData, evoData, allEvoPaths, evoUrl, oldEvoUrl;
 let isShiny = false;
 
 let searchBar = document.getElementById('searchBar');
@@ -39,7 +39,7 @@ async function GetPokemonData(pokemon = searchBar.value.toLowerCase()) {
     let specResp = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
     specData = await specResp.json();
     if (specData.evolution_chain !== null) {
-        let evoUrl = specData.evolution_chain.url;
+        evoUrl = specData.evolution_chain.url;
         let evoResp = await fetch(evoUrl);
         evoData = await evoResp.json();
     } else {
@@ -129,7 +129,7 @@ function PopulateTypeIcons(types) {
 function ParseEvoData() {
     allEvoPaths = [];
     if (evoData === null) {
-        console.warn('No evo path');
+        // console.warn('No evo path');
         let evoBase = {};
         evoBase.name = CapCase(pokData.name);
         evoBase.id = pokData.id;
@@ -167,6 +167,11 @@ function ParseEvoData() {
 }
 
 function PopulateEvoData() {
+    console.log(oldEvoUrl, evoUrl)
+    if (oldEvoUrl === evoUrl) {
+        return;
+    }
+    oldEvoUrl = evoUrl;
     evoCont.innerHTML = '';
     for (let i = 0; i < allEvoPaths.length; i++) {
         // let pEvo = document.createElement('p');
@@ -212,7 +217,8 @@ function PopulateEvoData() {
         evoCont.append(outterDiv);
     }
     // console.log(allEvoPaths);
-
+    
+    new SimpleBar(document.getElementById('evoCont'));
 }
 
 searchBtn.addEventListener('click', async function() {
@@ -288,6 +294,7 @@ function createAutocompleteList(arr) {
         li.appendChild(button);
         autoList.appendChild(li);
     });
+    new SimpleBar(document.getElementById('autoList'));
 }
 
 randBtn.addEventListener('click', async function() {
@@ -322,6 +329,7 @@ heartImg.addEventListener('click', function() {
 })
 
 favBtn.addEventListener('click', function() {
+    new SimpleBar(document.getElementById('favDrawer'));
     CreateElements();
     drawer.show();
 });
