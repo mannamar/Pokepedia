@@ -272,10 +272,16 @@ searchBar.addEventListener('focus', function() {
     autoList.classList.remove('hidden');
 });
 
-searchBar.addEventListener('blur', function() {
-    setTimeout(function(){
+// searchBar.addEventListener('blur', function() {
+//     setTimeout(function(){
+//         autoList.classList.add('hidden');
+//     }, 150);
+// });
+
+document.addEventListener('click', function(e) {   
+    if (!document.getElementById('autoWrap').contains(e.target)){
         autoList.classList.add('hidden');
-    }, 150);
+    }
 });
 
 function createAutocompleteList(arr) {
