@@ -210,10 +210,10 @@ function PopulateEvoData() {
             outterDiv.append(innerDiv);
         }
         evoCont.append(outterDiv);
-        new SimpleBar(document.getElementById('evoCont'));
     }
     // console.log(allEvoPaths);
-
+    
+    new SimpleBar(document.getElementById('evoCont'));
 }
 
 searchBtn.addEventListener('click', async function() {
