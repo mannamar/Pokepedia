@@ -327,7 +327,7 @@ nextBtn.addEventListener('click', async function() {
     }
 });
 
-leftCont.addEventListener('swiped-left', async function(e) {
+leftCont.addEventListener('swiped-right', async function(e) {
     if (pokId > 1) {
         await GetPokemonData(pokId - 1);
         await PopulateData();
@@ -335,7 +335,7 @@ leftCont.addEventListener('swiped-left', async function(e) {
     }
 });
 
-leftCont.addEventListener('swiped-right', async function(e) {
+leftCont.addEventListener('swiped-left', async function(e) {
     if (pokId < 1025) {
         await GetPokemonData(pokId + 1);
         await PopulateData();
