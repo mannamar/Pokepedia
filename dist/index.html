@@ -23,9 +23,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <!-- <link href="/dist/output.css" rel="stylesheet"> -->
-    <link href="./output.css" rel="stylesheet">
     <link rel="stylesheet" href="./awesomeplete/awesomplete.css">
     <script src="https://unpkg.com/phosphor-icons"></script>
+    <link
+        rel="stylesheet"
+        href="./simplebar/simplebar.css"
+    />
+    <link href="./output.css" rel="stylesheet">
 </head>
 
 <body>
@@ -69,7 +73,7 @@
                 <div id="btnCont" class="flex flex-wrap mt-5">
                     <div id="autoWrap" class="autocomplete-wrapper">
                         <input id="searchBar" type="text" placeholder="Pokemon name/number" class="px-3 py-1">
-                        <ul id="autoList" class="autocomplete-list hidden">
+                        <ul data-simplebar id="autoList" class="autocomplete-list hidden">
                             <!-- <li>
                                 <button>
                                     <span class="flex">
@@ -147,7 +151,7 @@
 
                 <div class="flex w-full mt-2">
                     <p class="shortCol text-2xl">Moves:</p>
-                    <div class="longCol max-h-24 overflow-y-scroll">
+                    <div data-simplebar class="longCol max-h-24 overflow-y-scroll">
                         <p id="movTxt" class="text-2xl">Razor Wind, Swords Dance, Cut, Bind, Vine Whip, Headbutt, Tackle, Body Slam, Take Down, Double Edge, Growl, Strength, Mega Drain, Leech Seed, Growth, Razor Leaf, Solar Beam, Poison Powder, Sleep Powder, Petal Dance, String Shot, Toxic, Rage, Mimic, Double Team, Defense Curl, Light Screen, Reflect, Bide, Sludge, Skull Bash, Amnesia, Flash, Rest, Substitute, Snore, Curse, Protect, Sludge Bomb, Mud Slap, Outrage, Giga Drain, Endure, Charm, False Swipe, Swagger, Fury Cutter, Attract, Sleep Talk, Return, Frustration, Safeguard, Sweet Scent, Synthesis, Hidden Power, Sunny Day, Rock Smash, Facade, Nature Power, Helping Hand, Ingrain, Knock Off, Secret Power, Weather Ball, Grass Whistle, Bullet Seed, Magical Leaf, Natural Gift, Worry Seed, Seed Bomb, Energy Ball, Leaf Storm, Power Whip, Captivate, Grass Knot, Venoshock, Round, Echoed Voice, Grass Pledge, Work Up, Grassy Terrain, Confide, Grassy Glide</p>
                     </div>
                 </div>
@@ -158,7 +162,7 @@
                 </div>
                 
                 <p class="text-3xl mt-10">Evolutions</p>
-                <div id="evoCont">
+                <div data-simplebar id="evoCont">
 
                     <div class="flex items-center justify-center">
 
@@ -188,6 +192,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <script type="module" src="./scripts/app.js"></script>
+    <script src="./simplebar/simplebar.min.js"></script>
 </body>
 
 </html>
