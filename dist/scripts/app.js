@@ -279,7 +279,7 @@ searchBar.addEventListener('focus', function() {
 // });
 
 document.addEventListener('click', function(e) {   
-    if (!document.getElementById('autoWrap').contains(e.target)){
+    if (!document.getElementById('autoWrap').contains(e.target) && document.activeElement !== searchBar){
         autoList.classList.add('hidden');
     }
 });
