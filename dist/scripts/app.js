@@ -18,7 +18,8 @@ const favDrawer = document.getElementById('favDrawer');
 const drawerXBtn = document.getElementById('drawerXBtn');
 const drawer = new Drawer(favDrawer);
 
-let pokData, specData, pokId, encData, evoData, allEvoPaths, evoUrl, oldEvoUrl;
+let pokData, specData, encData, evoData, allEvoPaths, evoUrl, oldEvoUrl;
+let pokId = 1;
 let isShiny = false;
 
 let searchBar = document.getElementById('searchBar');
@@ -79,6 +80,14 @@ function GetEnglishFlavText() {
 }
 
 async function PopulateData() {
+    prevBtn.classList.remove('invisible');
+    nextBtn.classList.remove('invisible');
+    if (pokId === 1) {
+        prevBtn.classList.add('invisible');
+    }
+    if (pokId === 1025) {
+        nextBtn.classList.add('invisible');
+    }
     isShiny = false;
     pokNameTxt.textContent = CapCase(pokData.name);
     pokNumTxt.textContent = '#' + String(pokData.id).padStart(3, '0');
@@ -167,7 +176,6 @@ function ParseEvoData() {
 }
 
 function PopulateEvoData() {
-    console.log(oldEvoUrl, evoUrl)
     if (oldEvoUrl === evoUrl) {
         return;
     }
@@ -189,7 +197,7 @@ function PopulateEvoData() {
             
             if (j > 0) {
                 let iCon = document.createElement('i');
-                iCon.classList.add('ph-arrow-right-bold');
+                iCon.classList.add('ph-arrow-right-bold', 'evoArr');
                 outterDiv.append(iCon);
             }
 
@@ -301,6 +309,38 @@ randBtn.addEventListener('click', async function() {
     await GetPokemonData(Math.floor(Math.random() * 1008) + 1);
     await PopulateData();
     AdaptiveBackgrounds();
+});
+
+prevBtn.addEventListener('click', async function() {
+    if (pokId > 1) {
+        await GetPokemonData(pokId - 1);
+        await PopulateData();
+        AdaptiveBackgrounds();
+    }
+});
+
+nextBtn.addEventListener('click', async function() {
+    if (pokId < 1025) {
+        await GetPokemonData(pokId + 1);
+        await PopulateData();
+        AdaptiveBackgrounds();
+    }
+});
+
+leftCont.addEventListener('swiped-right', async function(e) {
+    if (pokId > 1) {
+        await GetPokemonData(pokId - 1);
+        await PopulateData();
+        AdaptiveBackgrounds();
+    }
+});
+
+leftCont.addEventListener('swiped-left', async function(e) {
+    if (pokId < 1025) {
+        await GetPokemonData(pokId + 1);
+        await PopulateData();
+        AdaptiveBackgrounds();
+    }
 });
 
 pokImg.addEventListener('click', function() {
