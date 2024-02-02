@@ -60,10 +60,12 @@ function setFavIcon() {
         heartImg.classList.add('ph-heart-fill');
         heartImg.classList.add('text-red-600');
         heartImg.classList.remove('ph-heart');
+        heartImg.classList.remove('text-white');
     } else {
         heartImg.classList.remove('ph-heart-fill');
         heartImg.classList.remove('text-red-600');
         heartImg.classList.add('ph-heart');
+        heartImg.classList.add('text-white');
     }
 }
 
@@ -366,6 +368,7 @@ heartImg.addEventListener('click', function() {
     heartImg.classList.toggle('ph-heart-fill');
     heartImg.classList.toggle('ph-heart');
     heartImg.classList.toggle('text-red-600');
+    heartImg.classList.toggle('text-white');
 })
 
 favBtn.addEventListener('click', function() {
