@@ -210,6 +210,7 @@ function PopulateEvoData() {
             outterDiv.append(innerDiv);
         }
         evoCont.append(outterDiv);
+        new SimpleBar(document.getElementById('evoCont'));
     }
     // console.log(allEvoPaths);
 
