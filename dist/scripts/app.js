@@ -329,6 +329,7 @@ heartImg.addEventListener('click', function() {
 })
 
 favBtn.addEventListener('click', function() {
+    new SimpleBar(document.getElementById('favDrawer'));
     CreateElements();
     drawer.show();
 });
