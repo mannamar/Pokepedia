@@ -80,6 +80,14 @@ function GetEnglishFlavText() {
 }
 
 async function PopulateData() {
+    prevBtn.classList.remove('invisible');
+    nextBtn.classList.remove('invisible');
+    if (pokId === 1) {
+        prevBtn.classList.add('invisible');
+    }
+    if (pokId === 1025) {
+        nextBtn.classList.add('invisible');
+    }
     isShiny = false;
     pokNameTxt.textContent = CapCase(pokData.name);
     pokNumTxt.textContent = '#' + String(pokData.id).padStart(3, '0');
