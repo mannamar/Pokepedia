@@ -291,7 +291,7 @@ function createAutocompleteList(arr) {
         img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.num}.png`
         const div = document.createElement('div');
         div.classList.add('mt-3', 'ml-2');
-        div.innerText = `${item.num}. ${item.name}`
+        div.innerText = `${item.num}. ${CapCase(item.name)}`
         // button.innerHTML = item.name;
         button.addEventListener('click', async function() {
             autoList.textContent = '';
