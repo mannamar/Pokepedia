@@ -79,8 +79,12 @@ p {
 
 .ph-arrow-right-bold {
     color: white;
-    font-size: 22px;
+    /* font-size: 22px; */
     text-shadow: 0 0 12px rgba(0,0,0,.25);
+}
+
+.evoArr {
+    font-size: 22px;
 }
 
 .favPokBox {
