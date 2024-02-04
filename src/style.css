@@ -41,6 +41,7 @@ p {
 }
 
 #pokImg,
+.pokeImg,
 .evoImg,
 .favPokBox {
     transition: transform .1s;
