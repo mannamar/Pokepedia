@@ -446,7 +446,16 @@ async function PageLoad() {
     AdaptiveBackgrounds();
 }
 
+async function onChangeSlide(item) {
+    console.log(item.title);
+    await GetPokemonData(item.title);
+    await PopulateData();
+    AdaptiveBackgrounds();
+}
+
 PageLoad();
+
+export {onChangeSlide};
 
 // No Auto-complete for now
 // new Awesomplete(searchBar, {
